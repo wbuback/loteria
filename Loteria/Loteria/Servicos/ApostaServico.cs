@@ -1,13 +1,26 @@
 ﻿using Megasena.Models;
-using System;
+using Megasena.Repositorios;
 
 namespace Megasena.Servicos
 {
     public class ApostaServico : IApostaServico
     {
-        public ApostaModel AdicionarAposta()
+        private readonly IApostaRepositorio _apostaRepositorio;
+
+        public ApostaServico(IApostaRepositorio apostaRepositorio)
         {
-            throw new NotImplementedException();
+            _apostaRepositorio = apostaRepositorio;
+        }
+
+        public ApostaModel AdicionarAposta(ApostaModel model)
+        {
+
+            return _apostaRepositorio.AdicionarAposta(model);
+        }
+
+        public void Dispose()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -1,11 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Megasena.Models;
+using System;
 
 namespace Megasena.Repositorios
 {
     public class ApostaRepositorio : IApostaRepositorio
     {
+        public ApostaModel AdicionarAposta(ApostaModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            Dispose();
+        }
     }
 }
