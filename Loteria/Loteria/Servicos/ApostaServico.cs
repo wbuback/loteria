@@ -1,5 +1,6 @@
-﻿using Megasena.Models;
-using Megasena.Repositorios;
+﻿using Megasena.Interfaces.Repositorios;
+using Megasena.Interfaces.Servicos;
+using Megasena.Models;
 
 namespace Megasena.Servicos
 {
@@ -14,13 +15,8 @@ namespace Megasena.Servicos
 
         public ApostaModel AdicionarAposta(ApostaModel model)
         {
-
             return _apostaRepositorio.AdicionarAposta(model);
         }
 
-        public void Dispose()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

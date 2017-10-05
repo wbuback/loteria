@@ -1,13 +1,9 @@
-﻿using Megasena.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Megasena.Models;
 
-namespace Megasena.Repositorios
+namespace Megasena.Interfaces.Repositorios
 {
-    public interface IApostaRepositorio : IDisposable
+    public interface IApostaRepositorio
     {
         ApostaModel AdicionarAposta(ApostaModel model);
     }

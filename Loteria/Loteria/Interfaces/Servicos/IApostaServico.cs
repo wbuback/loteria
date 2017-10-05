@@ -1,9 +1,9 @@
-﻿using Megasena.Models;
-using System;
+﻿using System;
+using Megasena.Models;
 
-namespace Megasena.Servicos
+namespace Megasena.Interfaces.Servicos
 {
-    public interface IApostaServico : IDisposable
+    public interface IApostaServico
     {
         ApostaModel AdicionarAposta(ApostaModel model);
     }

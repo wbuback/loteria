@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace Megasena.Repositorios
+namespace Megasena.Interfaces.Repositorios
 {
-    public class ISorteioRepositorio
+    public interface ISorteioRepositorio
+
     {
-        
+
     }
 }

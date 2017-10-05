@@ -1,5 +1,6 @@
 ﻿using Megasena.Models;
 using System;
+using Megasena.Interfaces.Repositorios;
 
 namespace Megasena.Repositorios
 {
