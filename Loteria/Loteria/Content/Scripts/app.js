@@ -1,23 +1,42 @@
 ﻿$(document).ready(function (e) {
 
+    var atualizarApostas = function () {
+        $.ajax({
+            url: "Aposta/ListarApostas",
+            method: "get",
+            enctype: "application/json",
+            dataType: "json",
+        }).done(function (result) {
+            $('#apostasRealizadas').html(result);
+            console.log(result);
+        });
+    };
+
+    atualizarApostas();
+
     /**
      * Submete o formulário com os números selecionados
      */
     $("#formApostar").submit(function (event) {
         event.preventDefault();
-        var data = $(this).serializeFormJSON();
+        var contarApostas = $('input.dezenas:checked').length;
 
-        $.ajax({
-            url: "Aposta/FazerAposta",
-            method: "post",
-            enctype: "application/json",
-            type: "json",
-            data: data
-        }).done(function (result) {
-            alert("foi");
-        });
-
-        console.log(data);
+        if ((contarApostas < maximo) && (!$("#surpresinha").is(":checked"))) {
+            swal("Calmaê, Champs!", "Parece que você não entendeu como funciona os paranauê do game. Você precisa selecionar ao menos <strong>seis dezenas</strong> ou marca a <strong>surpresinha</strong> e deixa o sistema jogar por você. Tenta de novo aê!", "error");
+        } else {
+            var dezenas = $(this).serializeFormJSON();
+            $.ajax({
+                url: "Aposta/FazerAposta",
+                method: "post",
+                enctype: "application/json",
+                dataType: "json",
+                data: dezenas
+            }).done(function (result) {
+                swal("Você está quase lá!", result, "success")
+                console.log(result);
+                atualizarApostas();
+            });
+        }
     });
 
     /**
@@ -27,29 +46,20 @@
     var tituloMensagem = "Vamos com calma, filhote!";
     var mensagem = "Entendi que você quer ficar rico, mas, por enquanto, você só pode fazer jogos de <strong>seis dezenas</strong>!<br>Sabe como é... é a crise!";
 
-    $(".checkbox").change(function (e) {
-        var contaJogo1 = $('input[data-jogo=1]:checked').length;
-        var contaJogo2 = $('input[data-jogo=2]:checked').length;
+    $(".dezenas").change(function (e) {
+        $(".surpresinha").prop('checked', false);
+        var contarApostas = $('input.dezenas:checked').length;
         
-        if (contaJogo1 > maximo) {
+        if (contarApostas > maximo) {
             $(this).prop('checked', false);
             swal(tituloMensagem, mensagem, 'error');
         }
-         
-        if (contaJogo2 > maximo) {
-            $(this).prop('checked', false);
-            swal(tituloMensagem, mensagem, 'error');
-        }
-
-        console.log(contaJogo1 + " - " + contaJogo2);
     });
 
-    $(".radio").change(function (e) {
-        if (this.value !== maximo) {
-            $(this).prop('checked', false);
-            swal(tituloMensagem, mensagem, 'error');
+    $(".surpresinha").change(function (e) {
+        if ($(this).is(":checked")) {
+            $('input.dezenas').prop('checked', false);
         }
-        $(this).uncheckableRadio();
     });
 
 });
@@ -73,23 +83,5 @@
             }
         });
         return objeto;
-    };
-})(jQuery);
-
-/* Plugin para dechecar RadioButton */
-(function ($) {
-    $.fn.uncheckableRadio = function () {
-
-        return this.each(function () {
-            var radio = this;
-            $('label[for="' + radio.id + '"]').add(radio).mousedown(function () {
-                $(radio).data('wasChecked', radio.checked);
-            });
-
-            $('label[for="' + radio.id + '"]').add(radio).click(function () {
-                if ($(radio).data('wasChecked'))
-                    radio.checked = false;
-            });
-        });
     };
 })(jQuery);

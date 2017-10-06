@@ -8,39 +8,29 @@
     <div class="cartao">
         <h1>MEGA-SENA</h1>
         <p class="subtitulo">Você pode jogar marcando em um ou nos dois quadros abaixo.</p>
-    
-        @for (int jogos = 1; jogos <= 2; jogos++)
-        {
             <div class="bloco-numeros">
                 @for (int dezenas = 1; dezenas <= 60; dezenas++)
                 {
                     var numero = dezenas.ToString();
                     var dezena = dezenas < 10 ? "0" + numero : numero;
 
-                    <input type="checkbox" class="checkbox" value="@dezena" id="jogo@(jogos)_dezena@(dezena)" name="jogo@(jogos)[]" data-jogo="@(jogos)" />
-                    <label for="jogo@(jogos)_dezena@(dezena)">@dezena</label>
+                    <input type="checkbox" class="checkbox dezenas" value="@dezena" id="dezena@(dezena)" name="dezenas[]" />
+                    <label for="dezena@(dezena)">@dezena</label>
 
-                    if (dezenas % 10 == 0)
-                    { <br /> }
+                    if (dezenas % 10 == 0) { <br /> }
                 }
+                <input type="checkbox" class="checkbox surpresinha" value="true" id="surpresinha" name="surpresinha" />
+                <label for="surpresinha">Deixe o sistema escolher por mim.</label>
             </div>
-        }
-    
-        <p class="surpresinha"><span>Surpresinha</span> - Aqui o sistema escolhe os números por você. Indique quantas apostas deseja fazer.</p>
-        <div class="bloco-numeros">
-            @for (int sur = 6; sur <= 15; sur++)
-            {
-                <input type="radio" class="checkbox radio" value="@sur" id="supresinha@(sur)" name="radio[]" />
-                <label for="supresinha@(sur)">@sur</label>
-            }
-        </div>
-        <br/><br/>
         <p class="aviso">Confira o bilhete impresso pelo terminal. Ele é o único comprovante da aposta.</p>
-   
     </div>
     <br/>
     <button type="submit" name="name" class="btn-apostar"><i class="fa fa-money"></i> Apostar</button>
 </form>
+
+<div id="apostasRealizadas">
+    Apostas Realizadas
+</div>
 
 
 

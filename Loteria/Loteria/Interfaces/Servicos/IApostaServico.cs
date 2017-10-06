@@ -1,10 +1,11 @@
-﻿using System;
-using Megasena.Models;
+﻿using Megasena.Models;
+using System.Collections.Generic;
 
 namespace Megasena.Interfaces.Servicos
 {
     public interface IApostaServico
     {
-        ApostaModel AdicionarAposta(ApostaModel model);
+        void AdicionarAposta(int[] dezenas);
+        List<Aposta> ListarApostas();
     }
 }

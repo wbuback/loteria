@@ -1,19 +1,35 @@
-﻿using Megasena.Models;
-using System;
-using Megasena.Interfaces.Repositorios;
+﻿using Megasena.Interfaces.Repositorios;
+using Megasena.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
 namespace Megasena.Repositorios
 {
     public class ApostaRepositorio : IApostaRepositorio
     {
-        public ApostaModel AdicionarAposta(ApostaModel model)
+        public void AdicionarAposta(Aposta aposta)
         {
-            throw new NotImplementedException();
+            if (aposta == null) return;
+
+            List<Aposta> listaApostas = null;
+
+            if (HttpContext.Current.Session["Jogos"] != null)
+            {
+                listaApostas = (List<Aposta>)HttpContext.Current.Session["Jogos"];
+            } else
+            {
+                listaApostas = new List<Aposta>();
+            }
+            listaApostas.Add(aposta);
+            HttpContext.Current.Session["Jogos"] = listaApostas.ToList();
         }
 
-        public void Dispose()
+        public List<Aposta> ListarApostas()
         {
-            Dispose();
+            if (HttpContext.Current.Session["Jogos"] == null) return new List<Aposta>();
+            return (List<Aposta>)HttpContext.Current.Session["Jogos"];
         }
+
     }
 }

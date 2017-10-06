@@ -37,8 +37,16 @@ namespace Megasena
                 .Where(t => t.Name.EndsWith("Servico"))
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
+            builder.RegisterAssemblyTypes(typeof(SorteioServico).Assembly)
+                .Where(t => t.Name.EndsWith("Servico"))
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
 
             builder.RegisterAssemblyTypes(typeof(ApostaRepositorio).Assembly)
+                .Where(t => t.Name.EndsWith("Repositorio"))
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
+            builder.RegisterAssemblyTypes(typeof(SorteioRepositorio).Assembly)
                 .Where(t => t.Name.EndsWith("Repositorio"))
                 .AsImplementedInterfaces()
                 .InstancePerRequest();

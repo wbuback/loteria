@@ -1,6 +1,7 @@
 ﻿using Megasena.Interfaces.Repositorios;
 using Megasena.Interfaces.Servicos;
 using Megasena.Models;
+using System.Collections.Generic;
 
 namespace Megasena.Servicos
 {
@@ -13,9 +14,17 @@ namespace Megasena.Servicos
             _apostaRepositorio = apostaRepositorio;
         }
 
-        public ApostaModel AdicionarAposta(ApostaModel model)
+        public void AdicionarAposta(int[] dezenas)
         {
-            return _apostaRepositorio.AdicionarAposta(model);
+            var aposta = new Aposta(dezenas);
+
+            _apostaRepositorio.AdicionarAposta(aposta);
+        }
+
+        public List<Aposta> ListarApostas()
+        {
+            var apostas = _apostaRepositorio.ListarApostas();
+            return apostas;
         }
 
     }
