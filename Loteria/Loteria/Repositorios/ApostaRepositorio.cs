@@ -31,5 +31,10 @@ namespace Megasena.Repositorios
             return (List<Aposta>)HttpContext.Current.Session["Jogos"];
         }
 
+        public void Reiniciar()
+        {
+            HttpContext.Current.Session["Jogos"] = null;
+            HttpContext.Current.Session["Sorteio"] = null;
+        }
     }
 }

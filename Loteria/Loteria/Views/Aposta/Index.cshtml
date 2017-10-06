@@ -2,8 +2,6 @@
 @{
     ViewBag.Title = "Aposta Megasena";
 }
-
-
 <form action="" method="post" id="formApostar">
     <div class="cartao">
         <h1>MEGA-SENA</h1>
@@ -19,18 +17,26 @@
 
                     if (dezenas % 10 == 0) { <br /> }
                 }
-                <input type="checkbox" class="checkbox surpresinha" value="true" id="surpresinha" name="surpresinha" />
-                <label for="surpresinha">Deixe o sistema escolher por mim.</label>
+                <input type="checkbox" class="checkbox surpresinha" value="1" id="surpresinha" name="surpresinha" />
+                <label for="surpresinha" class="surpresinha">Deixe o sistema escolher por mim.</label>
             </div>
         <p class="aviso">Confira o bilhete impresso pelo terminal. Ele é o único comprovante da aposta.</p>
     </div>
     <br/>
-    <button type="submit" name="name" class="btn-apostar"><i class="fa fa-money"></i> Apostar</button>
+    <div style="text-align: center">
+        <button type="submit" id="apostar" class="btn-apostar"><i class="fa fa-money"></i> Apostar</button>
+        <button name="sortear" class="btn-sortear" id="sortear"><i class="fa fa-university" aria-hidden="true"></i> Sortear</button>
+    </div>
+
 </form>
 
-<div id="apostasRealizadas">
-    Apostas Realizadas
+<div class="cartaoConferencia">
+    <h2>Apostas Realizadas</h2>
+
+    <div id="apostasRealizadas"></div>
+
 </div>
+
 
 
 

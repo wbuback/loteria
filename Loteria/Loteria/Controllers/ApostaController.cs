@@ -34,46 +34,43 @@ namespace Megasena.Controllers
         }
 
         [HttpPost]
-        public ActionResult FazerAposta(int[] dezenas)
+        public ActionResult FazerAposta(int[] dezenas, string supresinha)
         {
-            _apostaServico.AdicionarAposta(dezenas);
+            _apostaServico.AdicionarAposta(dezenas, supresinha);
             return Json("Apostas realizadas. Falta pouco pra você ficar rico!", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult Conferir()
+        {
+            return View();
         }
 
         [HttpGet]
         public ActionResult ConferirApostas()
         {
-            var sorteio = _sorteioServico.ObterUltimo();
+            var sorteio = _sorteioServico.ObterUltimo();    
             var apostas = _apostaServico.ListarApostas();
-
-            int[] dezenasSorteio = null;
 
             if (sorteio == null)
             {
-                return Json("Calma aê, apressadinho! Não teve sorteio ainda.", JsonRequestBehavior.AllowGet);
+                return Json(new { erro = true, msg = "Calma aê, apressadinho! Não teve sorteio ainda." }, JsonRequestBehavior.AllowGet);
             }
-            else if(apostas == null)
+            else if(!apostas.Any())
             {
-                return Json("Véi, na boa... <br> Não acredito que você esqueceu de jogar!!!", JsonRequestBehavior.AllowGet);
+                return Json(new { erro = true, msg = "Não acredito que você esqueceu de jogar!!!"}, JsonRequestBehavior.AllowGet);
             }
             else
             {
+                int[] dezenasSorteio = null;
                 dezenasSorteio = sorteio.Dezenas;
-                List<Resultado> listaResultado = null;
+                List<Resultado> listaResultado = new List<Resultado>();
                 
                 foreach (var item in apostas)
                 {
                     var dezenasAposta = item.Dezenas;
-                    //var conferencia = dezenasAposta.Intersect(dezenasSorteio);
 
-
-                    var aConferir = new HashSet<int>(dezenasSorteio);
-                    var conferidos = dezenasAposta.Where(aConferir.Contains);
-                    int[] acertos = null;
-
-                    if (conferidos.Any())
-                        acertos = conferidos.ToArray();
-
+                    int[] acertos = dezenasAposta.Intersect(dezenasSorteio).ToArray();
 
                     listaResultado.Add(new Resultado {
                         Aposta = item,
@@ -84,6 +81,15 @@ namespace Megasena.Controllers
                 }
                 return Json(listaResultado, JsonRequestBehavior.AllowGet);
             }
+        }
+
+
+        [HttpGet]
+        public ActionResult Reiniciar()
+        {
+            _apostaServico.Reiniciar();
+
+            return Json("O jogo reiniciou. É sua hora de ganhar... ou continuar tentando!", JsonRequestBehavior.AllowGet);
         }
     }
 }

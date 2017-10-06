@@ -14,9 +14,9 @@ namespace Megasena.Servicos
             _apostaRepositorio = apostaRepositorio;
         }
 
-        public void AdicionarAposta(int[] dezenas)
+        public void AdicionarAposta(int[] dezenas, string surpresinha)
         {
-            var aposta = new Aposta(dezenas);
+            var aposta = new Aposta(dezenas, surpresinha);
 
             _apostaRepositorio.AdicionarAposta(aposta);
         }
@@ -27,5 +27,9 @@ namespace Megasena.Servicos
             return apostas;
         }
 
+        public void Reiniciar()
+        {
+            _apostaRepositorio.Reiniciar();
+        }
     }
 }

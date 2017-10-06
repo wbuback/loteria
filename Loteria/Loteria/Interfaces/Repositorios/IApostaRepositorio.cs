@@ -7,5 +7,7 @@ namespace Megasena.Interfaces.Repositorios
     {
         void AdicionarAposta(Aposta dezenas);
         List<Aposta> ListarApostas();
+
+        void Reiniciar();
     }
 }

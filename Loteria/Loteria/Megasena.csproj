@@ -169,7 +169,9 @@
     <Compile Include="Servicos\SorteioServico.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Scripts\apostas.js" />
     <Content Include="Content\Scripts\app.js" />
+    <Content Include="Content\Scripts\conferencia.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Css\Site.css" />
@@ -201,6 +203,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Aposta\Index.cshtml" />
     <Content Include="Views\Sorteio\Index.cshtml" />
+    <Content Include="Views\Aposta\Conferir.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
